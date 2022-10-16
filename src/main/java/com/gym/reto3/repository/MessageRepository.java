@@ -18,7 +18,7 @@ public class MessageRepository {
         return (List<Message>) messageCrudRepository.findAll();
     }
 
-    public Optional<Message> getReservation(int id){
+    public Optional<Message> getMessage(int id){
         return messageCrudRepository.findById(id);
     }
     public Message save(Message c){

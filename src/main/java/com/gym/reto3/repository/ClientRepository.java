@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Repository
-public class ClientRespository {
+public class ClientRepository {
     @Autowired
     private ClientCrudRepository clientCrudRepository;
 
