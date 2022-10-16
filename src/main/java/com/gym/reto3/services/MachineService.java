@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.Optional;
 
 @Service
-public class MachineServices {
+public class MachineService {
     @Autowired
     private MachineRepository machineRepository;
 
