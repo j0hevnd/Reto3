@@ -20,7 +20,7 @@ public class MachineController {
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Machine save(@RequestBody  Machine m){
-        return machineService.save(m);
+    public void save(@RequestBody  Machine m){
+        machineService.save(m);
     }
 }

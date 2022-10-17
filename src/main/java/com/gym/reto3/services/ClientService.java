@@ -1,5 +1,6 @@
 package com.gym.reto3.services;
 
+import com.gym.reto3.entities.Category;
 import com.gym.reto3.entities.Client;
 import com.gym.reto3.repository.ClientRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,16 @@ public class ClientService {
     }
 
     public Client save(Client c) {
-        Optional<Client> cat = clientRepository.getClient(c.getIdClient());
-        if (c.getIdClient() == null || cat.isEmpty()) {
+        if (c.getIdClient() == null) {
             return clientRepository.save(c);
+        } else {
+            Optional<Client> cat = clientRepository.getClient(c.getIdClient());
+            if (cat.isPresent()) {
+                return c;
+            } else {
+                return clientRepository.save(c);
+            }
         }
-        return c;
     }
 
     public Client update(Client c) {

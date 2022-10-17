@@ -1,5 +1,7 @@
 package com.gym.reto3.entities;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -12,8 +14,9 @@ public class Score implements Serializable {
     private String messageText;
     private String stars;
 
-    @ManyToOne
-    @JoinColumn(name = "reservationId")
+    @OneToOne
+    @JoinColumn(name = "idReservation")
+    @JsonIgnoreProperties("scores")
     private Reservation reservation;
 
     public Integer getIdScore() {

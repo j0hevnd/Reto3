@@ -12,30 +12,33 @@ import java.util.List;
 public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer reservationId;
+    private Integer idReservation;
     private Date startDate;
     private String status="created";
 
     @ManyToOne
-    @JoinColumn(name = "machineId")
-    @JsonIgnoreProperties("reservation")
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties("reservations")
     private Machine machine;
 
     @ManyToOne
     @JoinColumn(name = "clientId")
-    @JsonIgnoreProperties({"reservation", "messages"})
+    @JsonIgnoreProperties({"reservations", "messages"})
     private Client client;
 
-    @OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "reservation")
+    @OneToOne
     @JsonIgnoreProperties("reservation")
-    private List<Score> score;
+    private Score scores;
+    //@OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "reservation")
+    //@JsonIgnoreProperties("reservation")
+    //private List<Score> scores;
 
-    public Integer getReservationId() {
-        return reservationId;
+    public Integer getidReservation() {
+        return idReservation;
     }
 
-    public void setReservationId(Integer reservationId) {
-        this.reservationId = reservationId;
+    public void setidReservation(Integer idReservation) {
+        this.idReservation = idReservation;
     }
 
     public Date getStartDate() {
@@ -70,11 +73,11 @@ public class Reservation implements Serializable {
         this.client = client;
     }
 
-    public List<Score> getScore() {
-        return score;
+    public Score getScores() {
+        return scores;
     }
 
-    public void setScore(List<Score> score) {
-        this.score = score;
+    public void setScores(Score score) {
+        this.scores = score;
     }
 }

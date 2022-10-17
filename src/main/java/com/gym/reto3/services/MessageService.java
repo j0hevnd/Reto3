@@ -1,5 +1,6 @@
 package com.gym.reto3.services;
 
+import com.gym.reto3.entities.Machine;
 import com.gym.reto3.entities.Message;
 import com.gym.reto3.repository.MessageRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,16 @@ public class MessageService {
     }
 
     public Message save(Message c) {
-        Optional<Message> cat = messageRepository.getMessage(c.getIdMessage());
-        if (c.getIdMessage() == null || cat.isEmpty()) {
+        if (c.getIdMessage() == null) {
             return messageRepository.save(c);
+        } else {
+            Optional<Message> message = messageRepository.getMessage(c.getIdMessage());
+            if (message.isPresent()) {
+                return c;
+            } else {
+                return messageRepository.save(c);
+            }
         }
-        return c;
     }
 
     public Message update(Message c) {

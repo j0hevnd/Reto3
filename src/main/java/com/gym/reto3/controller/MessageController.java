@@ -20,7 +20,7 @@ public class MessageController {
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Message save(@RequestBody  Message p){
-        return messageService.save(p);
+    public void save(@RequestBody  Message p){
+        messageService.save(p);
     }
 }

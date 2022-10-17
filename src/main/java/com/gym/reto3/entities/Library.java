@@ -10,22 +10,22 @@ import java.io.Serializable;
 public class Library implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer librariesId;
     private String name;
     private String target;
     private String description;
 
     @ManyToOne
-    @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("library")
+    @JoinColumn(name = "id")
+    @JsonIgnoreProperties("libraries")
     private Category category;
 
     public Integer getId() {
-        return id;
+        return librariesId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setId(Integer librariesId) {
+        this.librariesId = librariesId;
     }
 
     public String getName() {

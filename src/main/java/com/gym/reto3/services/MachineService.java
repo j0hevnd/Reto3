@@ -1,6 +1,5 @@
 package com.gym.reto3.services;
 
-import com.gym.reto3.entities.Category;
 import com.gym.reto3.entities.Machine;
 import com.gym.reto3.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,10 +22,10 @@ public class MachineService {
     }
 
     public Machine save(Machine c) {
-        if (c.getMachineId() == null) {
+        if (c.getId() == null) {
             return machineRepository.save(c);
         } else {
-            Optional<Machine> machine = machineRepository.getMachine(c.getMachineId());
+            Optional<Machine> machine = machineRepository.getMachine(c.getId());
             if (machine.isPresent()) {
                 return c;
             } else {
@@ -36,8 +35,8 @@ public class MachineService {
     }
 
     public Machine update(Machine c) {
-        Optional<Machine> MachineServer = machineRepository.getMachine(c.getMachineId());
-        if (MachineServer.isPresent() && c.getMachineId() != null && c.getName() != null) {
+        Optional<Machine> MachineServer = machineRepository.getMachine(c.getId());
+        if (MachineServer.isPresent() && c.getId() != null && c.getName() != null) {
             MachineServer.get().setName(c.getName());
             MachineServer.get().setBrand(c.getBrand());
             MachineServer.get().setYears(c.getYears());

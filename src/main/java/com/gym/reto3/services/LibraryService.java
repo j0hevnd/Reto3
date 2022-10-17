@@ -1,5 +1,6 @@
 package com.gym.reto3.services;
 
+import com.gym.reto3.entities.Client;
 import com.gym.reto3.entities.Library;
 import com.gym.reto3.repository.LibraryRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,11 +23,16 @@ public class LibraryService {
     }
 
     public Library save(Library c) {
-        Optional<Library> cat = libraryRepository.getLibrary(c.getId());
-        if (c.getId() == null || cat.isEmpty()) {
+        if (c.getId() == null) {
             return libraryRepository.save(c);
+        } else {
+            Optional<Library> lib = libraryRepository.getLibrary(c.getId());
+            if (lib.isPresent()) {
+                return c;
+            } else {
+                return libraryRepository.save(c);
+            }
         }
-        return c;
     }
 
     public Library update(Library c) {

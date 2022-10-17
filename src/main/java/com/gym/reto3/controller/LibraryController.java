@@ -20,7 +20,7 @@ public class LibraryController {
     }
     @PostMapping("/save")
     @ResponseStatus(HttpStatus.CREATED)
-    public Library save(@RequestBody  Library l){
-        return libraryService.save(l);
+    public void save(@RequestBody  Library l){
+        libraryService.save(l);
     }
 }
