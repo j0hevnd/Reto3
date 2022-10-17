@@ -13,7 +13,7 @@ public class Score implements Serializable {
     private String stars;
 
     @ManyToOne
-    @JoinColumn(name = "score")
+    @JoinColumn(name = "reservationId")
     private Reservation reservation;
 
     public Integer getIdScore() {

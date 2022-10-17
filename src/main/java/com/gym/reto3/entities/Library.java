@@ -17,7 +17,7 @@ public class Library implements Serializable {
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("libs")
+    @JsonIgnoreProperties("library")
     private Category category;
 
     public Integer getId() {

@@ -22,16 +22,16 @@ public class ReservationService {
     }
 
     public Reservation save(Reservation c) {
-        Optional<Reservation> cat = reservationRepository.getReservation(c.getIdReservation());
-        if (c.getIdReservation() == null || cat.isEmpty()) {
+        Optional<Reservation> cat = reservationRepository.getReservation(c.getReservationId());
+        if (c.getReservationId() == null || cat.isEmpty()) {
             return reservationRepository.save(c);
         }
         return c;
     }
 
     public Reservation update(Reservation c) {
-        Optional<Reservation> ReservationServer = reservationRepository.getReservation(c.getIdReservation());
-        if (ReservationServer.isPresent() && c.getIdReservation() != null) {
+        Optional<Reservation> ReservationServer = reservationRepository.getReservation(c.getReservationId());
+        if (ReservationServer.isPresent() && c.getReservationId() != null) {
             ReservationServer.get().setStartDate(c.getStartDate());
             return reservationRepository.save(ReservationServer.get());
         }

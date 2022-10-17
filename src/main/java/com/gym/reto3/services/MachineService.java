@@ -1,5 +1,6 @@
 package com.gym.reto3.services;
 
+import com.gym.reto3.entities.Category;
 import com.gym.reto3.entities.Machine;
 import com.gym.reto3.repository.MachineRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,19 +23,24 @@ public class MachineService {
     }
 
     public Machine save(Machine c) {
-        Optional<Machine> cat = machineRepository.getMachine(c.getId());
-        if (c.getId() == null || cat.isEmpty()) {
+        if (c.getMachineId() == null) {
             return machineRepository.save(c);
+        } else {
+            Optional<Machine> machine = machineRepository.getMachine(c.getMachineId());
+            if (machine.isPresent()) {
+                return c;
+            } else {
+                return machineRepository.save(c);
+            }
         }
-        return c;
     }
 
     public Machine update(Machine c) {
-        Optional<Machine> MachineServer = machineRepository.getMachine(c.getId());
-        if (MachineServer.isPresent() && c.getId() != null && c.getName() != null) {
+        Optional<Machine> MachineServer = machineRepository.getMachine(c.getMachineId());
+        if (MachineServer.isPresent() && c.getMachineId() != null && c.getName() != null) {
             MachineServer.get().setName(c.getName());
             MachineServer.get().setBrand(c.getBrand());
-            MachineServer.get().setYear(c.getYear());
+            MachineServer.get().setYears(c.getYears());
             MachineServer.get().setDescription(c.getDescription());
             return machineRepository.save(MachineServer.get());
         }
@@ -42,9 +48,9 @@ public class MachineService {
     }
 
     public Boolean delete(int id){
-        Optional<Machine> MachineId = machineRepository.getMachine(id);
-        if (MachineId.isPresent()) {
-            machineRepository.delete(MachineId.get());
+        Optional<Machine> machine = machineRepository.getMachine(id);
+        if (machine.isPresent()) {
+            machineRepository.delete(machine.get());
             return true;
         }
         return false;

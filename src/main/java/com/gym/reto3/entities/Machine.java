@@ -11,15 +11,16 @@ import java.util.List;
 public class Machine implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer machineId;
     private String name;
     private String brand;
-    private Integer year;
+    @Column(name="year")
+    private Integer years;
     private String description;
 
     @ManyToOne
     @JoinColumn(name = "categoryId")
-    @JsonIgnoreProperties("machines")
+    @JsonIgnoreProperties("machine")
     private Category category;
 
     @OneToMany(cascade = {CascadeType.PERSIST}, mappedBy = "machine")
@@ -30,12 +31,12 @@ public class Machine implements Serializable {
     @JsonIgnoreProperties({"machine", "messages"})
     private List<Reservation> reservations;
 
-    public Integer getId() {
-        return id;
+    public Integer getMachineId() {
+        return machineId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setMachineId(Integer machineId) {
+        this.machineId = machineId;
     }
 
     public String getName() {
@@ -54,12 +55,12 @@ public class Machine implements Serializable {
         this.brand = brand;
     }
 
-    public Integer getYear() {
-        return year;
+    public Integer getYears() {
+        return years;
     }
 
-    public void setYear(Integer year) {
-        this.year = year;
+    public void setYears(Integer year) {
+        this.years = year;
     }
 
     public String getDescription() {

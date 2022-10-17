@@ -3,37 +3,39 @@ package com.gym.reto3.entities;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name="reservation")
-public class Reservation {
+public class Reservation implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer idReservation;
+    private Integer reservationId;
     private Date startDate;
     private String status="created";
 
     @ManyToOne
     @JoinColumn(name = "machineId")
-    @JsonIgnoreProperties("reservations")
+    @JsonIgnoreProperties("reservation")
     private Machine machine;
 
     @ManyToOne
     @JoinColumn(name = "clientId")
-    @JsonIgnoreProperties({"reservations", "messages"})
+    @JsonIgnoreProperties({"reservation", "messages"})
     private Client client;
 
     @OneToMany(cascade = {CascadeType.REMOVE}, mappedBy = "reservation")
     @JsonIgnoreProperties("reservation")
-    private Score score;
+    private List<Score> score;
 
-    public Integer getIdReservation() {
-        return idReservation;
+    public Integer getReservationId() {
+        return reservationId;
     }
 
-    public void setIdReservation(Integer idReservation) {
-        this.idReservation = idReservation;
+    public void setReservationId(Integer reservationId) {
+        this.reservationId = reservationId;
     }
 
     public Date getStartDate() {
@@ -68,11 +70,11 @@ public class Reservation {
         this.client = client;
     }
 
-    public Score getScore() {
+    public List<Score> getScore() {
         return score;
     }
 
-    public void setScore(Score score) {
+    public void setScore(List<Score> score) {
         this.score = score;
     }
 }

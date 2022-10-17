@@ -12,7 +12,7 @@ import javax.persistence.*;
 public class Category implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer id;
+    private Integer categoryId;
     private String name;
     private String description;
 
@@ -20,12 +20,12 @@ public class Category implements Serializable {
     @JsonIgnoreProperties("category")
     private List<Machine> machines;
 
-    public Integer getId() {
-        return id;
+    public Integer getcategoryId() {
+        return categoryId;
     }
 
-    public void setId(Integer id) {
-        this.id = id;
+    public void setCategoryId(Integer id) {
+        this.categoryId = id;
     }
 
     public String getName() {

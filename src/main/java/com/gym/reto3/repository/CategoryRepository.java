@@ -18,7 +18,7 @@ public class CategoryRepository {
         return (List<Category>) categoryCrudRepository.findAll();
     }
 
-    public Optional<Category> getCategory(int id){
+    public Optional<Category> getCategory(Integer id){
         return categoryCrudRepository.findById(id);
     }
 
@@ -30,4 +30,7 @@ public class CategoryRepository {
         categoryCrudRepository.delete(c);
     }
 
+    public void deleteAll() {
+        categoryCrudRepository.deleteAll();
+    }
 }
